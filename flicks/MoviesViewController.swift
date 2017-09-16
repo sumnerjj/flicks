@@ -11,6 +11,8 @@ import UIKit
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    var movies: [NSDictionary]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -24,12 +26,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             delegate:nil,
             delegateQueue:OperationQueue.main
         )
-        let task : URLSessionDataTask = session.dataTask(with: request, completionHandler: { (dataOrNil, response, error) in
+        let task : URLSessionDataTask = session.dataTask(with: request as URLRequest, completionHandler: { (dataOrNil, response, error) in
             if let data = dataOrNil {
                 if let responseDictionary = try!
-                    NSJSONSerialization.JSONObjectWithData(data, options:[]) as? NSDictionary
+                    JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary
                 {
                     print("response: \(responseDictionary)")
+                    self.movies = responseDictionary["results"] as! [NSDictionary]
                 }
             }
         });
@@ -49,7 +52,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
-        cell.textLabel?.text = "row \(indexPath.row)"
+        let movie = movies![indexPath.row]
+        let title = movie["title"] as! String
+        cell.textLabel?.text = title
         print("row \(indexPath.row)")
         return cell
     }
