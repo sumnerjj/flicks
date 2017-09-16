@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(movie)
 
         // Do any additional setup after loading the view.
     }
