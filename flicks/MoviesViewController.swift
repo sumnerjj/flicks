@@ -33,6 +33,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 {
                     print("response: \(responseDictionary)")
                     self.movies = responseDictionary["results"] as! [NSDictionary]
+                    self.tableView.reloadData()
                 }
             }
         });
@@ -47,7 +48,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 20
+        if let movies = movies{
+            return movies.count
+        }
+        else{
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
