@@ -15,6 +15,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let apikey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apikey)")
+        let request = NSURLRequest(url: url! as URL)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        let task : URLSessionDataTask = session.dataTask(with: request, completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try!
+                    NSJSONSerialization.JSONObjectWithData(data, options:[]) as? NSDictionary
+                {
+                    print("response: \(responseDictionary)")
+                }
+            }
+        });
+        task.resume()
 
         // Do any additional setup after loading the view.
     }
