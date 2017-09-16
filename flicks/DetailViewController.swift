@@ -21,6 +21,17 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(movie)
+        let title = movie["title"] as? String
+        let overview = movie["overview"] as? String
+        titleLabel.text = title
+        overviewLabel.text = overview
+        
+        let base_url = "https://image.tmdb.org/t/p/w500"
+        if let posterPath = movie["poster_path"] as? String {
+            let imageUrl = URL(fileURLWithPath: base_url + posterPath)
+            posterImageView.setImageWith(imageUrl as URL)
+            print(imageUrl)
+        }
 
         // Do any additional setup after loading the view.
     }
