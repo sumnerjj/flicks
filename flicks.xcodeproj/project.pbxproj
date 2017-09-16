@@ -14,6 +14,7 @@
 		D04564B81F6CD356000B3D4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04564B61F6CD356000B3D4A /* LaunchScreen.storyboard */; };
 		D04564C01F6CD3C0000B3D4A /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04564BF1F6CD3C0000B3D4A /* MoviesViewController.swift */; };
 		D04564C31F6CEA6F000B3D4A /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04564C21F6CEA6F000B3D4A /* MovieCell.swift */; };
+		D04564C61F6D0093000B3D4A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04564C51F6D0093000B3D4A /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D04564B91F6CD356000B3D4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D04564BF1F6CD3C0000B3D4A /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		D04564C21F6CEA6F000B3D4A /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		D04564C51F6D0093000B3D4A /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		D04564C41F6CEA89000B3D4A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D04564C51F6D0093000B3D4A /* DetailViewController.swift */,
 				D04564BF1F6CD3C0000B3D4A /* MoviesViewController.swift */,
 			);
 			name = "View Controllers";
@@ -239,6 +242,7 @@
 				D04564AE1F6CD356000B3D4A /* AppDelegate.swift in Sources */,
 				D04564C01F6CD3C0000B3D4A /* MoviesViewController.swift in Sources */,
 				D04564C31F6CEA6F000B3D4A /* MovieCell.swift in Sources */,
+				D04564C61F6D0093000B3D4A /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +406,7 @@
 				D04564BE1F6CD356000B3D4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
