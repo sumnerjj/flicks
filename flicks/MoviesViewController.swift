@@ -61,7 +61,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
-        cell.textLabel?.text = title
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         print("row \(indexPath.row)")
