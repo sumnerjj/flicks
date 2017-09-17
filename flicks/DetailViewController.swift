@@ -33,6 +33,7 @@ class DetailViewController: UIViewController {
             print(imageUrl)
         }
 
+
         // Do any additional setup after loading the view.
     }
 
