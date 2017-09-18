@@ -13,6 +13,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     var movies: [NSDictionary]?
+    var endPoint: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         
         let apikey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apikey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endPoint!)?api_key=\(apikey)")
         let request = NSURLRequest(url: url! as URL)
         let session = URLSession(
             configuration: URLSessionConfiguration.default,
@@ -65,9 +66,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let base_url = "https://image.tmdb.org/t/p/w500"
         
         if let posterPath = movie["poster_path"] as? String {
-            let imageUrl = NSURL(fileURLWithPath: base_url + posterPath)
-            cell.posterView.setImageWith(imageUrl as URL)
-            print(imageUrl)
+            let imageUrl = URL(string: base_url + posterPath)
+            cell.posterView.setImageWith(imageUrl as! URL)
         }
 
         
