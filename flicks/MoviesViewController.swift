@@ -33,6 +33,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let task : URLSessionDataTask = session.dataTask(with: request as URLRequest, completionHandler: { (dataOrNil, response, error) in
             MBProgressHUD.hide(for: self.view, animated: true)
+            print("asd")
+            print(error)
             if let data = dataOrNil {
                 if let responseDictionary = try!
                     JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary
