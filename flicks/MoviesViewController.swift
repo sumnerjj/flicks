@@ -20,6 +20,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+
         errorView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
@@ -59,6 +63,39 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        
+        let apikey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endPoint!)?api_key=\(apikey)")
+        let request = NSURLRequest(url: url! as URL)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        let task : URLSessionDataTask = session.dataTask(with: request as URLRequest, completionHandler: { (dataOrNil, response, error) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            print("asd")
+            print(error)
+            if (error != nil){
+                self.errorView.isHidden = false
+            }
+            if let data = dataOrNil {
+                if let responseDictionary = try!
+                    JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary
+                {
+                    print("response: \(responseDictionary)")
+                    self.movies = responseDictionary["results"] as! [NSDictionary]
+                    self.tableView.reloadData()
+                }
+            }
+            refreshControl.endRefreshing()
+        });
+        task.resume()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
