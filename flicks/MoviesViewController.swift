@@ -13,11 +13,14 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var errorView: UIView!
+    
     var movies: [NSDictionary]?
     var endPoint: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -35,6 +38,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             MBProgressHUD.hide(for: self.view, animated: true)
             print("asd")
             print(error)
+            if (error != nil){
+                self.errorView.isHidden = false
+            }
             if let data = dataOrNil {
                 if let responseDictionary = try!
                     JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary
